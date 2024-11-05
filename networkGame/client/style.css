@@ -1,0 +1,117 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+#gameContainer {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#raceTrack {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    background-color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.track-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: white;
+}
+
+.top-line { top: 0; }
+.bottom-line { bottom: 0; }
+
+.lane-divider {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: white;
+}
+
+.lane-divider-1 { top: 33.33%; }
+.lane-divider-2 { top: 66.66%; }
+
+#finishFlag {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    background: repeating-linear-gradient(
+            45deg,
+            #000,
+            #000 10px,
+            #fff 10px,
+            #fff 20px
+    );
+}
+
+.car {
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    transition: left 0.5s ease;
+}
+
+#car1 { top: 16.67%; } /* Centered in top third */
+#car2 { top: 50%; }    /* Centered in middle third */
+#car3 { top: 83.33%; } /* Centered in bottom third */
+
+.car-face {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    left: 0px;
+    top: -30px;
+    z-index: 2;
+}
+
+.car-body {
+    width: 100%;
+    height: 100%;
+    background-color: #f00; /* You can change this color or use different colors for each car */
+    border-radius: 10px;
+    position: absolute;
+    top: 20px;
+    z-index: 1;
+}
+
+.wheel {
+    width: 15px;
+    height: 15px;
+    background-color: #000;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -5px;
+}
+
+.wheel-left { left: 10px; }
+.wheel-right { right: 10px; }
+
+#playerInfo {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* You can add specific colors for each car if desired */
+#car1 .car-body { background-color: #f00; } /* Red */
+#car2 .car-body { background-color: #f00; } /* Green */
+#car3 .car-body { background-color: #f00; } /* Blue */

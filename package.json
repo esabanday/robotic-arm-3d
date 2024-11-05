@@ -1,0 +1,14 @@
+{
+  "name": "robotic-arm-3d",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main-server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "private": true
+}

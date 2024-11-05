@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hangman Game with Flow Field Background</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="flowFieldCanvas"></canvas>
+<div class="game-area">
+    <div class="flash-animation-container">
+        <canvas id="flashAnimation" width="230" height="300"></canvas>
+    </div>
+    <div class="main-game-area">
+        <div class="game-row">
+              <div id="raceTrack">
+            <div class="track-line top-line"></div>
+            <div class="lane-divider lane-divider-1"></div>
+            <div class="lane-divider lane-divider-2"></div>
+            <div class="lane-divider lane-divider-3"></div>
+            <div class="lane-divider lane-divider-4"></div>
+            <div class="track-line bottom-line"></div>
+            <div id="finishFlag"></div>
+            <div id="car1" class="car">
+                <img src="face1.png" alt="Face" class="car-face">
+                <div class="car-body">
+                    <div class="wheel wheel-left"></div>
+                    <div class="wheel wheel-right"></div>
+                </div>
+            </div>
+            <div id="car2" class="car">
+                <img src="face2.png" alt="Face" class="car-face">
+                <div class="car-body">
+                    <div class="wheel wheel-left"></div>
+                    <div class="wheel wheel-right"></div>
+                </div>
+            </div>
+            <div id="car3" class="car">
+                <img src="face3.png" alt="Face" class="car-face">
+                <div class="car-body"></div>
+                <div class="wheel wheel-left"></div>
+                <div class="wheel wheel-right"></div>
+            </div>
+            <div id="car4" class="car">
+                <img src="face4.png" alt="Face" class="car-face">
+                <div class="car-body"></div>
+                <div class="wheel wheel-left"></div>
+                <div class="wheel wheel-right">
+                </div>
+            </div>
+            <div id="car5" class="car">
+                <img src="face5.png" alt="Face" class="car-face">
+                <div class="car-body"></div>
+                <div class="wheel wheel-left"></div>
+                <div class="wheel wheel-right">
+                </div>
+            </div>
+        </div>
+              <div class="hangman-container">
+            <h1>Hangman Game</h1>
+            <p>Current Player: <span id="currentPlayer"></span></p>
+            <canvas id="hangmanCanvas" width="300" height="300"></canvas>
+            <div id="word"></div>
+            <div id="guessedLetters"></div>
+            <div class="input-container">
+                <input type="text" id="guessInput" maxlength="1">
+                <button onclick="makeGuess()">Guess</button>
+            </div>
+        </div>
+              <div class="multiple-choice-container">
+            <h2>Multiple Choice</h2>
+            <div id="question"></div>
+            <div id="choices"></div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script src="flashAnimation.js"></script>
+<script src="hangman.js"></script>
+<script src="raceTrack.js"></script>
+<script src="multipleChoice.js"></script>
+</body>
+</html>

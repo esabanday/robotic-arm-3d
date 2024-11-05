@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a3f3c4e1-dba8-4e45-a93b-4e53da6358bf" name="s2e.a3d.mytemp.websiter" url="http://s2e.a3d.mytemp.website">
+        <fileTransfer host="s2e.a3d.mytemp.website" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

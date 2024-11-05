@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Robotic Arm</title>
+  <style>
+    body { margin: 0; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/controls/OrbitControls.js"></script>
+
+<script>
+  let scene, camera, renderer, controls;
+  let arm, forearm, hand;
+  let armRotation = 0, forearmRotation = 0, handRotation = 0;
+  let currentPart = 0;
+  const rotationSpeed = 0.005;
+  const maxRotation = Math.PI / 4; // 45 degrees
+  const maxRotationHand = Math.PI/8;
+
+  function init() {
+    // Create scene
+    scene = new THREE.Scene();
+
+    // Create camera
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+
+    // Create renderer
+    renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // Create OrbitControls
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.25;
+    controls.enableZoom = true;
+
+    // Add light
+    const light = new THREE.PointLight(0xffffff, 1, 100);
+    light.position.set(0, 0, 10);
+    scene.add(light);
+
+    // Create robotic arm parts
+    const armGeometry = new THREE.BoxGeometry(0.5, 2, 0.5);
+    const armMaterial = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
+    arm = new THREE.Mesh(armGeometry, armMaterial);
+    arm.position.y = 1;
+
+    const forearmGeometry = new THREE.BoxGeometry(0.4, 1.5, 0.4);
+    const forearmMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff });
+    forearm = new THREE.Mesh(forearmGeometry, forearmMaterial);
+    forearm.position.y = 1.75;
+
+    hand = createClaw();  // or whichever function you choose
+    hand.position.y = 0.8;
+    hand.position.x = -0.2;
+    forearm.add(hand);
+
+    // Assemble the arm
+    arm.add(forearm);
+    forearm.add(hand);
+    scene.add(arm);
+
+    animate();
+  }
+
+  function createClaw() {
+    const shape = new THREE.Shape();
+    shape.moveTo(0, 0);
+    shape.lineTo(0.5, 0);
+    shape.lineTo(0.5, 0.5);
+    shape.lineTo(0.4, 0.5);
+    shape.lineTo(0.4, 0.1);
+    shape.lineTo(0.1, 0.1);
+    shape.lineTo(0.1, 0.5);
+    shape.lineTo(0, 0.5);
+    shape.lineTo(0, 0);
+
+    const extrudeSettings = {
+      steps: 2,
+      depth: 0.2,
+      bevelEnabled: false
+    };
+
+    const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+    const material = new THREE.MeshPhongMaterial({ color: 0x888888 });
+    return new THREE.Mesh(geometry, material);
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    // Sequential and slow rotation
+    switch(currentPart) {
+      case 0: // Rotate arm
+        armRotation += rotationSpeed;
+        arm.rotation.y = Math.sin(armRotation) * maxRotation;
+        if (armRotation >= Math.PI * 2) {
+          armRotation = 0;
+          currentPart = 1;
+        }
+        break;
+      case 1: // Rotate forearm
+        forearmRotation += rotationSpeed;
+        forearm.rotation.x = Math.sin(forearmRotation) * maxRotation;
+        if (forearmRotation >= Math.PI * 2) {
+          forearmRotation = 0;
+          currentPart = 2;
+        }
+        break;
+      case 2: // Rotate hand
+        handRotation += rotationSpeed;
+        hand.rotation.x = Math.sin(handRotation) * maxRotationHand;
+        if (handRotation >= Math.PI * 2) {
+          handRotation = 0;
+          currentPart = 0;
+        }
+        break;
+    }
+
+    renderer.render(scene, camera);
+  }
+
+  init();
+
+  // Handle window resizing
+  window.addEventListener('resize', function() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+</script>
+</body>
+</html>

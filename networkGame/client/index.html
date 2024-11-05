@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiplayer Race Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="raceTrack">
+  <div class="track-line top-line"></div>
+  <div class="lane-divider lane-divider-1"></div>
+  <div class="lane-divider lane-divider-2"></div>
+  <div class="track-line bottom-line"></div>
+  <div id="finishFlag"></div>
+  <div id="car1" class="car">
+    <img src="face1.png" alt="Face" class="car-face">
+    <div class="car-body">
+      <div class="wheel wheel-left"></div>
+      <div class="wheel wheel-right"></div>
+    </div>
+  </div>
+  <div id="car2" class="car">
+    <img src="face2.png" alt="Face" class="car-face">
+    <div class="car-body">
+      <div class="wheel wheel-left"></div>
+      <div class="wheel wheel-right"></div>
+    </div>
+  </div>
+  <div id="car3" class="car">
+    <img src="face3.png" alt="Face" class="car-face">
+    <div class="car-body"></div>
+    <div class="wheel wheel-left"></div>
+    <div class="wheel wheel-right"></div>
+  </div>
+</div>
+<div id="playerInfo">Waiting for players...</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="client.js"></script>
+</body>
+</html>
